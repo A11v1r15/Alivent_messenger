@@ -23,7 +23,7 @@
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "alivent.mixins.json"
   ],
 
   "depends": {
