@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "alivent",
-  "version": "1.0.0",
+  "version": "${version}",
 
   "name": "Aliven't messager",
   "description": "A simple server-side mod that tells when a named mob turns aliven't",
