@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "alivent",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Aliven't messager",
+  "description": "A simple server-side mod that tells when a named mob turns aliven't",
   "authors": [
-    "Me!"
+    "A11v1r15"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/A11v1r15/Alivent_named_entities"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/alivent/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "net.a11v1r15.AliventMessager"
     ]
   },
   "mixins": [
