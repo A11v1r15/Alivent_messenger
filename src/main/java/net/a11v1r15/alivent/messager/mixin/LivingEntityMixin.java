@@ -1,4 +1,4 @@
-package net.a11v1r15.mixin;
+package net.a11v1r15.alivent.messager.mixin;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {
 	LivingEntity This = ((LivingEntity)(Object)this);
-	@Inject(at = @At(value = "HEAD"), method = "onDeath()V")
+	@Inject(at = @At(value = "HEAD"), method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V")
 	private void init(CallbackInfo info) {
         if (!This.world.isClient &&
 		     This.hasCustomName() &&

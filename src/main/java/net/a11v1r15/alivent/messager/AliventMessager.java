@@ -1,4 +1,4 @@
-package net.a11v1r15;
+package net.a11v1r15.alivent.messager;
 
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
