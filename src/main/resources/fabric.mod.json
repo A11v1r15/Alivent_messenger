@@ -9,11 +9,11 @@
     "A11v1r15"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/A11v1r15/Alivent_named_entities"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/alivent-messager",
+    "sources": "https://github.com/A11v1r15/Alivent_messager"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/alivent/icon.png",
 
   "environment": "*",
