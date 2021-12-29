@@ -3,7 +3,6 @@ package net.a11v1r15.alivent.messager.mixin;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Util;
 import net.minecraft.world.GameRules;
 
@@ -18,7 +17,6 @@ public class LivingEntityMixin {
 	@Inject(at = @At(value = "HEAD"), method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V")
 	private void init(CallbackInfo info) {
         if (!This.world.isClient &&
-		     This.world instanceof ServerWorld &&
 		     This.world.getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES) &&
 		     This.hasCustomName()) {
 				 final boolean test = (This instanceof TameableEntity && ((TameableEntity)This).getOwner() instanceof ServerPlayerEntity);

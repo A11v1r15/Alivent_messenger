@@ -1,8 +1,6 @@
 package net.a11v1r15.alivent.messager.mixin;
 
 import net.minecraft.entity.passive.VillagerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
 import net.minecraft.util.Util;
 import net.minecraft.world.GameRules;
 
@@ -18,7 +16,6 @@ public class VillagerEntityMixin {
 	private void init(CallbackInfo info) {
         if (!This.world.isClient &&
 		     This.world.getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES) &&
-		     This.world instanceof ServerWorld &&
 		    !This.hasCustomName()) {
 				This.world.getPlayers().forEach(player -> player.sendSystemMessage(This.getDamageTracker().getDeathMessage(), Util.NIL_UUID));
 		}
