@@ -25,7 +25,7 @@ public class LivingEntityMixin {
                 This.world.getPlayers().forEach(player -> {if (!(test && ((TameableEntity) This).getOwnerUuid() == player.getUuid())) player.sendSystemMessage(This.getDamageTracker().getDeathMessage(), Util.NIL_UUID);});
             } else if (This instanceof VillagerEntity) {
                 This.world.getPlayers().forEach(player -> player.sendSystemMessage(This.getDamageTracker().getDeathMessage(), Util.NIL_UUID));
-            } else if (This instanceof ZombieVillagerEntity && (((ZombieVillagerEntity)This).isConverting() || false)) {
+            } else if (This instanceof ZombieVillagerEntity && (((ZombieVillagerEntity)This).isConverting() || ((ZombieVillagerEntity)This).getXp() >= 1)) {
                 This.world.getPlayers().forEach(player -> player.sendSystemMessage(This.getDamageTracker().getDeathMessage(), Util.NIL_UUID));
             }
         }
