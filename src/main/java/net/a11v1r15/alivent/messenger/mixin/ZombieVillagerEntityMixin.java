@@ -1,4 +1,4 @@
-package net.a11v1r15.alivent.messager.mixin;
+package net.a11v1r15.alivent.messenger.mixin;
 
 import net.minecraft.entity.mob.ZombieVillagerEntity;
 import net.minecraft.text.Text;
@@ -10,7 +10,7 @@ import net.minecraft.village.VillagerProfession;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(ZombieVillagerEntity.class)
-public class ZombieVillagerEntityMixin {
+public class ZombieVillagerEntityMixin{
 	ZombieVillagerEntity This = ((ZombieVillagerEntity)(Object)this);
     protected Text getDefaultName() {
 		if(!This.getVillagerData().getProfession().equals(VillagerProfession.NONE)){

@@ -1,4 +1,4 @@
-package net.a11v1r15.alivent.messager.mixin;
+package net.a11v1r15.alivent.messenger.mixin;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.ZombieVillagerEntity;

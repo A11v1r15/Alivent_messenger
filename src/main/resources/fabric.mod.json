@@ -3,14 +3,14 @@
   "id": "alivent",
   "version": "1.1.0",
 
-  "name": "Aliven't Messager",
+  "name": "Aliven't Messenger",
   "description": "A simple server-side mod that tells when a named mob turns aliven't",
   "authors": [
     "A11v1r15"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/alivent-messager",
-    "sources": "https://github.com/A11v1r15/Alivent_messager"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/alivent-messenger",
+    "sources": "https://github.com/A11v1r15/Alivent_messenger"
   },
 
   "license": "MIT",
@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.a11v1r15.alivent.messager.AliventMessager"
+      "net.a11v1r15.alivent.messenger.AliventMessenger"
     ]
   },
   "mixins": [
