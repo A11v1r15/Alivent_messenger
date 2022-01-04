@@ -4,11 +4,11 @@
   "package": "net.a11v1r15.alivent.messenger.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-  ],
-  "client": [
     "LivingEntityMixin",
     "CreeperEntityMixin",
     "ZombieVillagerEntityMixin"
+  ],
+  "server": [
   ],
   "injectors": {
     "defaultRequire": 1
