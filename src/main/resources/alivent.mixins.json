@@ -6,7 +6,8 @@
   "mixins": [
     "LivingEntityMixin",
     "CreeperEntityMixin",
-    "ZombieVillagerEntityMixin"
+    "ZombieVillagerEntityMixin",
+    "EntityMixin"
   ],
   "server": [
   ],
