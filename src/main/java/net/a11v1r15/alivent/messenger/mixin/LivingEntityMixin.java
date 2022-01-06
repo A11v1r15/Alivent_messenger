@@ -31,13 +31,15 @@ extends Entity {
     private void init(CallbackInfo info) {
         if (!this.world.isClient &&
             this.world.getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES)) {
-            if (this.hasCustomName()) {
+            if (this.hasCustomName() || this.world.getGameRules().getBoolean(GameRules.ALIVENT_ALL_MOBS)) {
                 final boolean test = ((Object)this instanceof TameableEntity && ((TameableEntity)(Object)this).getOwner() instanceof ServerPlayerEntity);
                 this.world.getPlayers().forEach(player -> {if (!(test && ((TameableEntity)(Object)this).getOwnerUuid() == player.getUuid())) player.sendSystemMessage(this.getDamageTracker().getDeathMessage(), Util.NIL_UUID);});
-            } else if ((Object)this instanceof VillagerEntity) {
-                this.world.getPlayers().forEach(player -> player.sendSystemMessage(this.getDamageTracker().getDeathMessage(), Util.NIL_UUID));
-            } else if ((Object)this instanceof ZombieVillagerEntity && (((ZombieVillagerEntity)(Object)this).isConverting() || ((ZombieVillagerEntity)(Object)this).getXp() >= 1)) {
-                this.world.getPlayers().forEach(player -> player.sendSystemMessage(this.getDamageTracker().getDeathMessage(), Util.NIL_UUID));
+            } else if(this.world.getGameRules().getBoolean(GameRules.ALIVENT_VILLAGERS)){
+                if ((Object)this instanceof VillagerEntity) {
+                    this.world.getPlayers().forEach(player -> player.sendSystemMessage(this.getDamageTracker().getDeathMessage(), Util.NIL_UUID));
+                } else if ((Object)this instanceof ZombieVillagerEntity && (((ZombieVillagerEntity)(Object)this).isConverting() || ((ZombieVillagerEntity)(Object)this).getXp() >= 1)) {
+                    this.world.getPlayers().forEach(player -> player.sendSystemMessage(this.getDamageTracker().getDeathMessage(), Util.NIL_UUID));
+                }
             }
         }
     }

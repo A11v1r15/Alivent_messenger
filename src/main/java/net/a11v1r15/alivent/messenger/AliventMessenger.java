@@ -15,6 +15,9 @@ public class AliventMessenger implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
+		public static final GameRules.Key<GameRules.BooleanRule> ALIVENT_ALL_MOBS = GameRuleRegistry.register("aliventAllMobs", Category.MOBS, GameRuleFactory.createBooleanRule(false));
+		public static final GameRules.Key<GameRules.BooleanRule> ALIVENT_VILLAGERS = GameRuleRegistry.register("aliventVillagers", Category.MOBS, GameRuleFactory.createBooleanRule(true));
+		public static final GameRules.Key<GameRules.BooleanRule> ALIVENT_LORE_DROPS = GameRuleRegistry.register("aliventLoreDrops", Category.MOBS, GameRuleFactory.createBooleanRule(false));
 
 		LOGGER.info("TheGrimReaper entered the chat");
 	}

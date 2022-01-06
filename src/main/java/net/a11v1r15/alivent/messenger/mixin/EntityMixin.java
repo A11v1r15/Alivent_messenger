@@ -9,6 +9,8 @@ import net.minecraft.nbt.NbtString;
 import net.minecraft.server.command.CommandOutput;
 import net.minecraft.util.Nameable;
 import net.minecraft.world.entity.EntityLike;
+import net.minecraft.world.GameRules;
+import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,7 +23,7 @@ EntityLike,
 CommandOutput {
     @ModifyVariable(at = @At(value = "STORE"), ordinal = 0, method = "dropStack(Lnet/minecraft/item/ItemStack;F)Lnet/minecraft/entity/ItemEntity;")
     private ItemEntity init(ItemEntity x) {
-        if(this.hasCustomName()){
+        if(this.hasCustomName() && this.world.getGameRules().getBoolean(GameRules.ALIVENT_LORE_DROPS)){
             NbtList lore = new NbtList();
             lore.add(0, NbtString.of("{\"text\":\"" + this.getCustomName().getString() + "\"}"));
             NbtCompound display = x.getStack().getOrCreateSubNbt(ItemStack.DISPLAY_KEY);
