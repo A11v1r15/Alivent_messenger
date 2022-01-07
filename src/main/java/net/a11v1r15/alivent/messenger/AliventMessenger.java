@@ -14,15 +14,15 @@ public class AliventMessenger implements ModInitializer {
     // That way, it's clear which mod wrote info, warnings, and errors.
     public static final Logger LOGGER = LogManager.getLogger("Alivent");
 
+    public static final GameRules.Key<GameRules.BooleanRule> ALIVENT_ALL_MOBS = GameRuleRegistry.register("aliventAllMobs", Category.MOBS, GameRuleFactory.createBooleanRule(false));
+    public static final GameRules.Key<GameRules.BooleanRule> ALIVENT_VILLAGERS = GameRuleRegistry.register("aliventVillagers", Category.MOBS, GameRuleFactory.createBooleanRule(true));
+    public static final GameRules.Key<GameRules.BooleanRule> ALIVENT_LORE_DROPS = GameRuleRegistry.register("aliventLoreDrops", Category.MOBS, GameRuleFactory.createBooleanRule(false));
+
     @Override
     public void onInitialize() {
         // This code runs as soon as Minecraft is in a mod-load-ready state.
         // However, some things (like resources) may still be uninitialized.
         // Proceed with mild caution.
-        public static final GameRules.Key<GameRules.BooleanRule> ALIVENT_ALL_MOBS = GameRuleRegistry.register("aliventAllMobs", Category.MOBS, GameRuleFactory.createBooleanRule(false));
-        public static final GameRules.Key<GameRules.BooleanRule> ALIVENT_VILLAGERS = GameRuleRegistry.register("aliventVillagers", Category.MOBS, GameRuleFactory.createBooleanRule(true));
-        public static final GameRules.Key<GameRules.BooleanRule> ALIVENT_LORE_DROPS = GameRuleRegistry.register("aliventLoreDrops", Category.MOBS, GameRuleFactory.createBooleanRule(false));
-
         LOGGER.info("TheGrimReaper entered the chat");
     }
 }
