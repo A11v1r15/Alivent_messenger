@@ -13,6 +13,7 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
@@ -21,6 +22,7 @@ public abstract class EntityMixin
 implements Nameable,
 EntityLike,
 CommandOutput {
+    @Shadow public World world;
     @ModifyVariable(at = @At(value = "STORE"), ordinal = 0, method = "dropStack(Lnet/minecraft/item/ItemStack;F)Lnet/minecraft/entity/ItemEntity;")
     private ItemEntity init(ItemEntity x) {
         if(this.hasCustomName() && this.world.getGameRules().getBoolean(GameRules.ALIVENT_LORE_DROPS)){
