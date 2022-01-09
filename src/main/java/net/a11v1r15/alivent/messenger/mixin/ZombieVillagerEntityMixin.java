@@ -26,9 +26,8 @@ extends ZombieEntity{
     protected Text getDefaultName() {
 		if(!this.getVillagerData().getProfession().equals(VillagerProfession.NONE)){
 			TranslatableText profession = new TranslatableText(this.getType().getTranslationKey().replace("zombie_", "") + "." + Registry.VILLAGER_PROFESSION.getId(this.getVillagerData().getProfession()).getPath());
-        	TranslatableText zombie = new TranslatableText("entity.minecraft.zombie_villager");
-			return new LiteralText(profession.getString() + " (" + zombie.getString() + ")");
+			return new LiteralText(profession.getString() + " (" + super.getDefaultName() + ")");
 		}
-		return new TranslatableText("entity.minecraft.zombie_villager");
+		return super.getDefaultName();
     }
 }
