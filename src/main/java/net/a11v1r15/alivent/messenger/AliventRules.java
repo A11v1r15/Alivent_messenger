@@ -14,6 +14,7 @@ public abstract class AliventRules {
     public static final GameRules.Key<GameRules.BooleanRule> ALIVENT_VILLAGERS = GameRuleRegistry.register("aliventVillagers", Category.CHAT, GameRuleFactory.createBooleanRule(true));
     public static final GameRules.Key<GameRules.BooleanRule> ALIVENT_LORE_DROPS = GameRuleRegistry.register("aliventLoreDrops", Category.DROPS, GameRuleFactory.createBooleanRule(true));
     public static final GameRules.Key<GameRules.BooleanRule> ALIVENT_SPECIES_NAME = GameRuleRegistry.register("aliventSpeciesName", Category.MOBS, GameRuleFactory.createBooleanRule(false));
+    public static final GameRules.Key<GameRules.BooleanRule> ALIVENT_SERVER_SPAM_REMOVER = GameRuleRegistry.register("aliventServerSpamRemover", Category.MISC, GameRuleFactory.createBooleanRule(true));
 
     public static void startGameRules(){
         LOGGER.info("TheGrimReaper entered the chat");

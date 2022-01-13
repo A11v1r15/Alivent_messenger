@@ -13,6 +13,10 @@ import net.minecraft.util.Util;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 
+import org.apache.logging.log4j.Logger;
+
+import com.llamalad7.mixinextras.injector.WrapWithCondition;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -43,5 +47,13 @@ extends Entity {
                 }
             }
         }
+    }
+
+    @WrapWithCondition(
+	    method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V", 
+	    at = @At(value = "INVOKE", target = "Lorg/apache/logging/log4j/Logger;info(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V")
+    )
+    private boolean jnit(Logger instance, String message, Object p0, Object p1) {
+        return !this.world.getGameRules().getBoolean(AliventRules.ALIVENT_SERVER_SPAM_REMOVER);
     }
 }

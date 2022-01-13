@@ -7,7 +7,9 @@
     "LivingEntityMixin",
     "CreeperEntityMixin",
     "ZombieVillagerEntityMixin",
-    "EntityMixin"
+    "VillagerEntityMixin",
+    "EntityMixin",
+    "DamageTrackerMixin"
   ],
   "server": [
   ],
