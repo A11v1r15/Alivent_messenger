@@ -30,8 +30,11 @@ dependencies {
 
 	// MixinExtras
 	implementation("com.github.LlamaLad7:MixinExtras:0.0.1")
-    annotationProcessor("com.github.LlamaLad7:MixinExtras:0.0.1")
+	{ transitive = false }
+	annotationProcessor("com.github.LlamaLad7:MixinExtras:0.0.1")
+	{ transitive = false }
 	include("com.github.LlamaLad7:MixinExtras:0.0.1")
+	{ transitive = false }
 }
 
 processResources {
