@@ -9,7 +9,6 @@ import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
-import net.minecraft.scoreboard.Team;
 import net.minecraft.server.command.CommandOutput;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
