@@ -31,7 +31,6 @@ extends Entity {
     }
 
     @Shadow abstract DamageTracker getDamageTracker();
-    
     @Inject(at = @At(value = "HEAD"), method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V")
     private void init(CallbackInfo info) {
         if (!this.world.isClient &&
@@ -42,7 +41,7 @@ extends Entity {
             } else if(this.world.getGameRules().getBoolean(AliventRules.ALIVENT_VILLAGERS)){
                 if ((Object)this instanceof VillagerEntity) {
                     this.world.getPlayers().forEach(player -> player.sendSystemMessage(this.getDamageTracker().getDeathMessage(), Util.NIL_UUID));
-                } else if ((Object)this instanceof ZombieVillagerEntity && (((ZombieVillagerEntity)(Object)this).isConverting() || ((ZombieVillagerEntity)(Object)this).getXp() >= 1)) {
+                } else if ((Object)this instanceof ZombieVillagerEntity && (((ZombieVillagerEntity)(Object)this).isConverting() || ((ZombieVillagerEntity)(Object)this).getVillagerData().getLevel() >= 1)) {
                     this.world.getPlayers().forEach(player -> player.sendSystemMessage(this.getDamageTracker().getDeathMessage(), Util.NIL_UUID));
                 }
             }
