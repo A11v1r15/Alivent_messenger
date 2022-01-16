@@ -41,7 +41,7 @@ extends Entity {
             } else if(this.world.getGameRules().getBoolean(AliventRules.ALIVENT_VILLAGERS)){
                 if ((Object)this instanceof VillagerEntity) {
                     this.world.getPlayers().forEach(player -> player.sendSystemMessage(this.getDamageTracker().getDeathMessage(), Util.NIL_UUID));
-                } else if ((Object)this instanceof ZombieVillagerEntity && (((ZombieVillagerEntity)(Object)this).isConverting() || ((ZombieVillagerEntity)(Object)this).getVillagerData().getLevel() >= 1)) {
+                } else if ((Object)this instanceof ZombieVillagerEntity && (((ZombieVillagerEntity)(Object)this).canImmediatelyDespawn(Double.MAX_VALUE))) {
                     this.world.getPlayers().forEach(player -> player.sendSystemMessage(this.getDamageTracker().getDeathMessage(), Util.NIL_UUID));
                 }
             }
