@@ -29,11 +29,11 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// MixinExtras
-	implementation("com.github.LlamaLad7:MixinExtras:0.0.1")
+	implementation("com.github.LlamaLad7:MixinExtras:0.0.9")
 	{ transitive = false }
-	annotationProcessor("com.github.LlamaLad7:MixinExtras:0.0.1")
+	annotationProcessor("com.github.LlamaLad7:MixinExtras:0.0.9")
 	{ transitive = false }
-	include("com.github.LlamaLad7:MixinExtras:0.0.1")
+	include("com.github.LlamaLad7:MixinExtras:0.0.9")
 	{ transitive = false }
 }
 
