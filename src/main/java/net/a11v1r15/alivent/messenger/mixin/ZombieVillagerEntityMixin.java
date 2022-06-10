@@ -9,7 +9,6 @@ import net.minecraft.entity.mob.ZombieVillagerEntity;
 import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.village.VillagerData;
 import net.minecraft.village.VillagerProfession;
@@ -26,7 +25,7 @@ extends ZombieEntity{
     protected Text getDefaultName() {
 		if(!this.getVillagerData().getProfession().equals(VillagerProfession.NONE)){
 			Text profession = Text.translatable(this.getType().getTranslationKey().replace("zombie_", "") + "." + Registry.VILLAGER_PROFESSION.getId(this.getVillagerData().getProfession()).getPath());
-			return MutableText.of(new LiteralTextContent(profession + " (" + this.getType().getName().getString() + ")"));
+			return MutableText.of(new LiteralTextContent(profession.getString() + " (" + this.getType().getName().getString() + ")"));
 		}
 		return this.getType().getName();
     }
