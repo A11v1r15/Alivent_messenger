@@ -9,7 +9,6 @@ import net.minecraft.entity.mob.ZombieVillagerEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Util;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 
@@ -38,12 +37,12 @@ extends Entity {
             this.world.getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES)) {
             if (this.hasCustomName() || this.world.getGameRules().getBoolean(AliventRules.ALIVENT_ALL_MOBS)) {
                 final boolean test = ((Object)this instanceof TameableEntity && ((TameableEntity)(Object)this).getOwner() instanceof ServerPlayerEntity);
-                this.world.getPlayers().forEach(player -> {if (!(test && ((TameableEntity)(Object)this).getOwnerUuid() == player.getUuid())) player.sendSystemMessage(this.getDamageTracker().getDeathMessage(), Util.NIL_UUID);});
+                this.world.getPlayers().forEach(player -> {if (!(test && ((TameableEntity)(Object)this).getOwnerUuid() == player.getUuid())) player.sendMessage(this.getDamageTracker().getDeathMessage(), false);});
             } else if(this.world.getGameRules().getBoolean(AliventRules.ALIVENT_VILLAGERS)){
                 if ((Object)this instanceof VillagerEntity) {
-                    this.world.getPlayers().forEach(player -> player.sendSystemMessage(this.getDamageTracker().getDeathMessage(), Util.NIL_UUID));
+                    this.world.getPlayers().forEach(player -> player.sendMessage(this.getDamageTracker().getDeathMessage(), false));
                 } else if ((Object)this instanceof ZombieVillagerEntity && !(((ZombieVillagerEntity)(Object)this).canImmediatelyDespawn(Double.MAX_VALUE))) {
-                    this.world.getPlayers().forEach(player -> player.sendSystemMessage(this.getDamageTracker().getDeathMessage(), Util.NIL_UUID));
+                    this.world.getPlayers().forEach(player -> player.sendMessage(this.getDamageTracker().getDeathMessage(), false));
                 }
             }
         }

@@ -10,7 +10,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.server.command.CommandOutput;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Nameable;
@@ -53,7 +53,7 @@ CommandOutput {
     private Text jnit(Text x) {
         if(x != null) {
             if(this.world.getGameRules().getBoolean(AliventRules.ALIVENT_SPECIES_NAME)){
-                x = new LiteralText(x.getString() + " (" + this.getDefaultName().getString() + ")");
+                x = MutableText.of(new LiteralTextContent(x.getString() + " (" + this.getDefaultName().getString() + ")"));
             }
             if(SpawnEggItem.forEntity(this.getType()) != null && this.world.getGameRules().getBoolean(AliventRules.ALIVENT_NAME_COLOUR))
                 ((MutableText)x).setStyle(x.getStyle().withColor(SpawnEggItem.forEntity(this.getType()).getColor(0)));

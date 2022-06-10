@@ -1,18 +1,19 @@
 package net.a11v1r15.alivent.messenger.mixin;
 
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.mob.ZombieVillagerEntity;
+import net.minecraft.text.LiteralTextContent;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.village.VillagerData;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.World;
-
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(ZombieVillagerEntity.class)
 public abstract class ZombieVillagerEntityMixin
@@ -24,8 +25,8 @@ extends ZombieEntity{
 	@Override
     protected Text getDefaultName() {
 		if(!this.getVillagerData().getProfession().equals(VillagerProfession.NONE)){
-			TranslatableText profession = new TranslatableText(this.getType().getTranslationKey().replace("zombie_", "") + "." + Registry.VILLAGER_PROFESSION.getId(this.getVillagerData().getProfession()).getPath());
-			return new LiteralText(profession.getString() + " (" + this.getType().getName().getString() + ")");
+			Text profession = Text.translatable(this.getType().getTranslationKey().replace("zombie_", "") + "." + Registry.VILLAGER_PROFESSION.getId(this.getVillagerData().getProfession()).getPath());
+			return MutableText.of(new LiteralTextContent(profession + " (" + this.getType().getName().getString() + ")"));
 		}
 		return this.getType().getName();
     }
