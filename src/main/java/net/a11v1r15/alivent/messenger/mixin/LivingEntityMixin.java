@@ -1,26 +1,27 @@
 package net.a11v1r15.alivent.messenger.mixin;
 
-import net.a11v1r15.alivent.messenger.AliventRules;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageTracker;
-import net.minecraft.entity.mob.ZombieVillagerEntity;
-import net.minecraft.entity.passive.TameableEntity;
-import net.minecraft.entity.passive.VillagerEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
-
 import org.slf4j.Logger;
-
-import com.llamalad7.mixinextras.injector.WrapWithCondition;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import com.llamalad7.mixinextras.injector.WrapWithCondition;
+
+import net.a11v1r15.alivent.messenger.AliventRules;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.brain.MemoryModuleType;
+import net.minecraft.entity.damage.DamageTracker;
+import net.minecraft.entity.mob.ZombieVillagerEntity;
+import net.minecraft.entity.passive.AllayEntity;
+import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.entity.passive.VillagerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.world.GameRules;
+import net.minecraft.world.World;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin
@@ -38,6 +39,9 @@ extends Entity {
             if (this.hasCustomName() || this.world.getGameRules().getBoolean(AliventRules.ALIVENT_ALL_MOBS)) {
                 final boolean test = ((Object)this instanceof TameableEntity && ((TameableEntity)(Object)this).getOwner() instanceof ServerPlayerEntity);
                 this.world.getPlayers().forEach(player -> {if (!(test && ((TameableEntity)(Object)this).getOwnerUuid() == player.getUuid())) player.sendMessage(this.getDamageTracker().getDeathMessage(), false);});
+            } else if (((Object)this instanceof AllayEntity) && ((AllayEntity)(Object)this).isHoldingItem()) {
+                long likedPlayer = ((AllayEntity)(Object)this).getBrain().getMemory(MemoryModuleType.LIKED_PLAYER);
+                this.world.getPlayers().forEach(player -> {if (player.getUuidAsString().equals(likedPlayer + "")) player.sendMessage(this.getDamageTracker().getDeathMessage(), false);});
             } else if(this.world.getGameRules().getBoolean(AliventRules.ALIVENT_VILLAGERS)){
                 if ((Object)this instanceof VillagerEntity) {
                     this.world.getPlayers().forEach(player -> player.sendMessage(this.getDamageTracker().getDeathMessage(), false));
