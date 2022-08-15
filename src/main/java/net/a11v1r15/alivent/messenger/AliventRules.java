@@ -1,11 +1,12 @@
 package net.a11v1r15.alivent.messenger;
 
-import net.minecraft.world.GameRules;
-import net.minecraft.world.GameRules.Category;
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.minecraft.world.GameRules;
+import net.minecraft.world.GameRules.Category;
 
 public abstract class AliventRules {
     public static final Logger LOGGER = LogManager.getLogger("Alivent");

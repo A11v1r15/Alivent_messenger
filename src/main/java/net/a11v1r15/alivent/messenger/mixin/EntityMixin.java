@@ -1,5 +1,12 @@
 package net.a11v1r15.alivent.messenger.mixin;
 
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
+
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+
 import net.a11v1r15.alivent.messenger.AliventRules;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -14,15 +21,8 @@ import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Nameable;
-import net.minecraft.world.entity.EntityLike;
 import net.minecraft.world.World;
-
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import net.minecraft.world.entity.EntityLike;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin
