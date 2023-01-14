@@ -1,5 +1,8 @@
 package net.a11v1r15.alivent.messenger.mixin;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -40,8 +43,8 @@ extends Entity {
                 final boolean test = ((Object)this instanceof TameableEntity && ((TameableEntity)(Object)this).getOwner() instanceof ServerPlayerEntity);
                 this.world.getPlayers().forEach(player -> {if (!(test && ((TameableEntity)(Object)this).getOwnerUuid() == player.getUuid())) player.sendMessage(this.getDamageTracker().getDeathMessage(), false);});
             } else if (((Object)this instanceof AllayEntity) && ((AllayEntity)(Object)this).isHoldingItem()) {
-                long likedPlayer = ((AllayEntity)(Object)this).getBrain().getMemory(MemoryModuleType.LIKED_PLAYER);
-                this.world.getPlayers().forEach(player -> {if (player.getUuidAsString().equals(likedPlayer + "")) player.sendMessage(this.getDamageTracker().getDeathMessage(), false);});
+                Optional<UUID> likedPlayer = ((AllayEntity)(Object)this).getBrain().getOptionalMemory(MemoryModuleType.LIKED_PLAYER);
+                this.world.getPlayers().forEach(player -> {if (player.getUuid().equals(likedPlayer.get())) player.sendMessage(this.getDamageTracker().getDeathMessage(), false);});
             } else if(this.world.getGameRules().getBoolean(AliventRules.ALIVENT_VILLAGERS)){
                 if ((Object)this instanceof VillagerEntity) {
                     this.world.getPlayers().forEach(player -> player.sendMessage(this.getDamageTracker().getDeathMessage(), false));

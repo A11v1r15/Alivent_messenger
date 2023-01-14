@@ -12,7 +12,6 @@ import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
-import net.minecraft.world.explosion.Explosion;
 
 @Mixin(CreeperEntity.class)
 public abstract class CreeperEntityMixin
@@ -27,7 +26,7 @@ implements SkinOverlayOwner {
         if (!this.world.isClient &&
 		     this.world.getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES) &&
 		     this.hasCustomName()) {
-				 this.damage(DamageSource.explosion(this.world.createExplosion(null, this.getX(), this.getY(), this.getZ(), 0, Explosion.DestructionType.NONE)), Float.MAX_VALUE);
+				 this.damage(DamageSource.explosion(this.world.createExplosion(null, this.getX(), this.getY(), this.getZ(), 0, World.ExplosionSourceType.NONE)), Float.MAX_VALUE);
 		}
 	}
 }
