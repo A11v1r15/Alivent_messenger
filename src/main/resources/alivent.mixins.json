@@ -6,6 +6,7 @@
   "mixins": [
     "LivingEntityMixin",
     "CreeperEntityMixin",
+    "WaterCreatureEntityMixin",
     "ZombieVillagerEntityMixin",
     "VillagerEntityMixin",
     "EntityMixin"
