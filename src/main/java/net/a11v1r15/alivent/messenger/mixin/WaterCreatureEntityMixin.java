@@ -1,9 +1,9 @@
 package net.a11v1r15.alivent.messenger.mixin;
 
+import net.minecraft.entity.damage.DamageSources;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArgs;
-import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
@@ -18,12 +18,9 @@ extends PathAwareEntity {
 		super(entityType, world);
 	}
 
-	
-	@ModifyArgs(method = "tickWaterBreathingAir(I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"))
-	private void injected(Args args) {
-		DamageSource a0 = args.get(0);
-		float a1 = args.get(1);
-		args.set(0, this.getDamageSources().dryOut());
-		args.set(1, a1);
-	}
+    @Redirect(method = "tickWaterBreathingAir(I)V",
+              at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/damage/DamageSources;drown()Lnet/minecraft/entity/damage/DamageSource;"))
+    private DamageSource alivent$changeDrownToDryOut(DamageSources instance) {
+        return instance.dryOut();
+    }
 }
