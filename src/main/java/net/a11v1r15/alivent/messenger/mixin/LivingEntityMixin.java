@@ -36,7 +36,7 @@ extends Entity {
     @Shadow abstract DamageTracker getDamageTracker();
     
     @Inject(at = @At(value = "HEAD"), method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V")
-    private void init(CallbackInfo info) {
+    private void alivent$sendAliventMessageToChat(CallbackInfo info) {
         if (!this.world.isClient &&
             this.world.getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES)) {
             if (this.hasCustomName() || this.world.getGameRules().getBoolean(AliventRules.ALIVENT_ALL_MOBS)) {
@@ -59,7 +59,7 @@ extends Entity {
 	    method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V", 
 	    at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;info(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V")
     )
-    private boolean jnit(Logger instance, String message, Object p0, Object p1) {
+    private boolean alivent$conditionallyRemoveAliventMessageFromLog(Logger instance, String message, Object p0, Object p1) {
         return !this.world.getGameRules().getBoolean(AliventRules.ALIVENT_SERVER_SPAM_REMOVER);
     }
 }

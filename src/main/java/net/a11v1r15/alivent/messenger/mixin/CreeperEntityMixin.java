@@ -22,7 +22,7 @@ implements SkinOverlayOwner {
 	}
 	
 	@Inject(at = @At(value = "HEAD"), method = "explode()V")
-	private void init(CallbackInfo info) {
+	private void alivent$giveExplosionDamageToExplodingCreeper(CallbackInfo info) {
         if (!this.world.isClient &&
 		     this.world.getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES) &&
 		     (this.hasCustomName() || this.world.getGameRules().getBoolean(AliventRules.ALIVENT_ALL_MOBS))) {

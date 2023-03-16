@@ -34,7 +34,7 @@ CommandOutput {
         method = "dropStack(Lnet/minecraft/item/ItemStack;F)Lnet/minecraft/entity/ItemEntity;",
         at = @At(value = "STORE"), ordinal = 0
         )
-    private ItemEntity init(ItemEntity x) {
+    private ItemEntity alivent$giveLoreNameToDroppings(ItemEntity x) {
         if(this.hasCustomName() && this.world.getGameRules().getBoolean(AliventRules.ALIVENT_LORE_DROPS)){
             NbtList lore = new NbtList();
             lore.add(0, NbtString.of("{\"text\":\"" + this.getCustomName().getString() + "\"}"));
@@ -50,24 +50,24 @@ CommandOutput {
         method = "getName()Lnet/minecraft/text/Text;",
         at = @At(value = "STORE"), ordinal = 0
         )
-    private Text jnit(Text x) {
-        if(x != null) {
+    private Text alivent$giveColourToEntityName(Text name) {
+        if(name != null) {
             if(this.world.getGameRules().getBoolean(AliventRules.ALIVENT_SPECIES_NAME)){
-                x = MutableText.of(new LiteralTextContent(x.getString() + " (" + this.getDefaultName().getString() + ")"));
+                name = MutableText.of(new LiteralTextContent(name.getString() + " (" + this.getDefaultName().getString() + ")"));
             }
             if(SpawnEggItem.forEntity(this.getType()) != null && this.world.getGameRules().getBoolean(AliventRules.ALIVENT_NAME_COLOUR))
-                ((MutableText)x).setStyle(x.getStyle().withColor(SpawnEggItem.forEntity(this.getType()).getColor(0)));
+                ((MutableText)name).setStyle(name.getStyle().withColor(SpawnEggItem.forEntity(this.getType()).getColor(0)));
         }
-        return x;
+        return name;
     }
 
     @ModifyExpressionValue(
         method = "getName()Lnet/minecraft/text/Text;", 
         at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;getDefaultName()Lnet/minecraft/text/Text;")
         )
-    private Text init(Text x) {
+    private Text alivent$giveColourToEntityDefaultName(Text name) {
         if(SpawnEggItem.forEntity(this.getType()) != null && this.world.getGameRules().getBoolean(AliventRules.ALIVENT_NAME_COLOUR))
-            ((MutableText)x).setStyle(x.getStyle().withColor(SpawnEggItem.forEntity(this.getType()).getColor(0)));
-        return x;
+            ((MutableText)name).setStyle(name.getStyle().withColor(SpawnEggItem.forEntity(this.getType()).getColor(0)));
+        return name;
     }
 }
