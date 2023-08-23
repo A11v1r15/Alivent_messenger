@@ -37,19 +37,19 @@ extends Entity {
     
     @Inject(at = @At(value = "HEAD"), method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V")
     private void alivent$sendAliventMessageToChat(CallbackInfo info) {
-        if (!this.world.isClient &&
-            this.world.getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES)) {
-            if (this.hasCustomName() || this.world.getGameRules().getBoolean(AliventRules.ALIVENT_ALL_MOBS)) {
+        if (!this.getWorld().isClient &&
+            this.getWorld().getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES)) {
+            if (this.hasCustomName() || this.getWorld().getGameRules().getBoolean(AliventRules.ALIVENT_ALL_MOBS)) {
                 final boolean test = ((Object)this instanceof TameableEntity && ((TameableEntity)(Object)this).getOwner() instanceof ServerPlayerEntity);
-                this.world.getPlayers().forEach(player -> {if (!(test && ((TameableEntity)(Object)this).getOwnerUuid() == player.getUuid())) player.sendMessage(this.getDamageTracker().getDeathMessage(), false);});
+                this.getWorld().getPlayers().forEach(player -> {if (!(test && ((TameableEntity)(Object)this).getOwnerUuid() == player.getUuid())) player.sendMessage(this.getDamageTracker().getDeathMessage(), false);});
             } else if (((Object)this instanceof AllayEntity) && ((AllayEntity)(Object)this).isHoldingItem()) {
                 Optional<UUID> likedPlayer = ((AllayEntity)(Object)this).getBrain().getOptionalMemory(MemoryModuleType.LIKED_PLAYER);
-                this.world.getPlayers().forEach(player -> {if (player.getUuid().equals(likedPlayer.get())) player.sendMessage(this.getDamageTracker().getDeathMessage(), false);});
-            } else if(this.world.getGameRules().getBoolean(AliventRules.ALIVENT_VILLAGERS)){
+                this.getWorld().getPlayers().forEach(player -> {if (player.getUuid().equals(likedPlayer.get())) player.sendMessage(this.getDamageTracker().getDeathMessage(), false);});
+            } else if(this.getWorld().getGameRules().getBoolean(AliventRules.ALIVENT_VILLAGERS)){
                 if ((Object)this instanceof VillagerEntity) {
-                    this.world.getPlayers().forEach(player -> player.sendMessage(this.getDamageTracker().getDeathMessage(), false));
+                    this.getWorld().getPlayers().forEach(player -> player.sendMessage(this.getDamageTracker().getDeathMessage(), false));
                 } else if ((Object)this instanceof ZombieVillagerEntity && !(((ZombieVillagerEntity)(Object)this).canImmediatelyDespawn(Double.MAX_VALUE))) {
-                    this.world.getPlayers().forEach(player -> player.sendMessage(this.getDamageTracker().getDeathMessage(), false));
+                    this.getWorld().getPlayers().forEach(player -> player.sendMessage(this.getDamageTracker().getDeathMessage(), false));
                 }
             }
         }
@@ -60,6 +60,6 @@ extends Entity {
 	    at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;info(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V")
     )
     private boolean alivent$conditionallyRemoveAliventMessageFromLog(Logger instance, String message, Object p0, Object p1) {
-        return !this.world.getGameRules().getBoolean(AliventRules.ALIVENT_SERVER_SPAM_REMOVER);
+        return !this.getWorld().getGameRules().getBoolean(AliventRules.ALIVENT_SERVER_SPAM_REMOVER);
     }
 }
