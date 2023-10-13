@@ -17,7 +17,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.server.command.CommandOutput;
-import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Nameable;
@@ -53,7 +52,7 @@ CommandOutput {
     private Text alivent$giveColourToEntityName(Text name) {
         if(name != null) {
             if(this.world.getGameRules().getBoolean(AliventRules.ALIVENT_SPECIES_NAME)){
-                name = MutableText.of(new LiteralTextContent(name.getString() + " (" + this.getDefaultName().getString() + ")"));
+                name = Text.translatable("commands.list.nameAndId", name, this.getDefaultName());
             }
             if(SpawnEggItem.forEntity(this.getType()) != null && this.world.getGameRules().getBoolean(AliventRules.ALIVENT_NAME_COLOUR))
                 ((MutableText)name).setStyle(name.getStyle().withColor(SpawnEggItem.forEntity(this.getType()).getColor(0)));
