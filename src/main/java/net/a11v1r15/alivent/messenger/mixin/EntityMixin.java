@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
-import net.a11v1r15.alivent.messenger.AliventRules;
+import net.a11v1r15.alivent.messenger.AliventMessenger;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -33,8 +33,8 @@ CommandOutput {
         method = "dropStack(Lnet/minecraft/item/ItemStack;F)Lnet/minecraft/entity/ItemEntity;",
         at = @At(value = "STORE"), ordinal = 0
         )
-    private ItemEntity alivent$giveLoreNameToDroppings(ItemEntity x) {
-        if(this.hasCustomName() && this.world.getGameRules().getBoolean(AliventRules.ALIVENT_LORE_DROPS)){
+    private ItemEntity aliventMessenger$giveLoreNameToDroppings(ItemEntity x) {
+        if(this.hasCustomName() && AliventMessenger.CONFIG.loreDrops()){
             NbtList lore = new NbtList();
             lore.add(0, NbtString.of("{\"text\":\"" + this.getCustomName().getString() + "\"}"));
             NbtCompound display = x.getStack().getOrCreateSubNbt(ItemStack.DISPLAY_KEY);
@@ -45,17 +45,17 @@ CommandOutput {
 
     @Shadow abstract Text getDefaultName();
     @Shadow abstract EntityType<?> getType();
+
     @ModifyVariable(
         method = "getName()Lnet/minecraft/text/Text;",
         at = @At(value = "STORE"), ordinal = 0
         )
-    private Text alivent$giveColourToEntityName(Text name) {
+    private Text aliventMessenger$giveColourToEntityName(Text name) {
         if(name != null) {
-            if(this.world.getGameRules().getBoolean(AliventRules.ALIVENT_SPECIES_NAME)){
+            if(AliventMessenger.CONFIG.speciesName())
                 name = Text.translatable("commands.list.nameAndId", name, this.getDefaultName());
-            }
-            if(SpawnEggItem.forEntity(this.getType()) != null && this.world.getGameRules().getBoolean(AliventRules.ALIVENT_NAME_COLOUR))
-                ((MutableText)name).setStyle(name.getStyle().withColor(SpawnEggItem.forEntity(this.getType()).getColor(0)));
+            if(SpawnEggItem.forEntity(this.getType()) != null && AliventMessenger.CONFIG.nameColour())
+                ((MutableText)name).styled(style -> style.withColor(SpawnEggItem.forEntity(this.getType()).getColor(0)));
         }
         return name;
     }
@@ -64,8 +64,8 @@ CommandOutput {
         method = "getName()Lnet/minecraft/text/Text;", 
         at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;getDefaultName()Lnet/minecraft/text/Text;")
         )
-    private Text alivent$giveColourToEntityDefaultName(Text name) {
-        if(SpawnEggItem.forEntity(this.getType()) != null && this.world.getGameRules().getBoolean(AliventRules.ALIVENT_NAME_COLOUR))
+    private Text aliventMessenger$giveColourToEntityDefaultName(Text name) {
+        if(SpawnEggItem.forEntity(this.getType()) != null && AliventMessenger.CONFIG.nameColour())
             ((MutableText)name).setStyle(name.getStyle().withColor(SpawnEggItem.forEntity(this.getType()).getColor(0)));
         return name;
     }

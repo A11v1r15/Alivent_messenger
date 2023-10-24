@@ -1,14 +1,14 @@
 {
 	"schemaVersion": 1,
-	"id": "alivent",
-	"version": "1.2.8",
+	"id": "alivent-messenger",
+	"version": "1.3.0",
 	"name": "Aliven't Messenger",
 	"description": "A simple server-side mod that tells when a named mob turns aliven't",
 	"authors": [
 		"A11v1r15"
 	],
 	"contact": {
-		"homepage": "https://www.curseforge.com/minecraft/mc-mods/alivent-messenger",
+		"homepage": "https://modrinth.com/mod/alivent-messager",
 		"sources": "https://github.com/A11v1r15/Alivent_messenger"
 	},
 	"license": "MIT",
@@ -26,7 +26,7 @@
 		"alivent.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.14.23",
+		"fabricloader": ">=0.14.24",
 		"minecraft": "~1.20",
 		"java": ">=17",
 		"fabric-api": "*"

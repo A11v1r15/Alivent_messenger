@@ -7,11 +7,7 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-	// Add repositories to retrieve artifacts from in here.
-	// You should only use this when depending on other mods because
-	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-	// for more information about repositories.
+	maven { url 'https://maven.wispforest.io' }
 	maven { url 'https://jitpack.io' }
 }
 
@@ -19,7 +15,7 @@ loom {
     splitEnvironmentSourceSets()
 
     mods {
-        "alivent" {
+        "alivent-messenger" {
             sourceSet sourceSets.main
             sourceSet sourceSets.client
         }
@@ -43,6 +39,11 @@ dependencies {
 	{ transitive = false }
 	include("com.github.LlamaLad7:MixinExtras:0.1.1")
 	{ transitive = false }
+	
+	// Config oωo
+    modImplementation "io.wispforest:owo-lib:${project.owo_version}"
+    annotationProcessor "io.wispforest:owo-lib:${project.owo_version}"
+    include "io.wispforest:owo-sentinel:${project.owo_version}"
 }
 
 base {

@@ -38,3 +38,6 @@ hs_err_*.log
 replay_*.log
 *.hprof
 *.jfr
+
+# generated
+src/main/java/net/a11v1r15/alivent/messenger/AliventMessengerConfig.java
