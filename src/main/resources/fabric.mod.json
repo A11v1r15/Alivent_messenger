@@ -2,16 +2,16 @@
 	"schemaVersion": 1,
 	"id": "alivent-messenger",
 	"name": "Aliven't Messenger",
-	"version": "1.3.0",
+	"version": "${version}",
 	"environment": "server",
 	"license": "MIT",
-	"icon": "assets/alivent/icon.png",
+	"icon": "assets/alivent-messenger/icon.png",
 	"entrypoints": {
 		"main": [
-			"net.a11v1r15.alivent.messenger.AliventMessenger"
+			"net.a11v1r15.aliventmessenger.AliventMessenger"
 		],
 		"preLaunch": [
-			"net.a11v1r15.alivent.messenger.preLaunch"
+			"net.a11v1r15.aliventmessenger.preLaunch"
 		]
 	},
 	"contact": {
@@ -30,6 +30,6 @@
 	],
 	"description": "A simple server-side mod that tells when a named mob turns aliven't",
 	"mixins": [
-		"alivent.mixins.json"
+		"alivent-messenger.mixins.json"
 	]
 }

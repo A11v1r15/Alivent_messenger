@@ -1,11 +1,11 @@
-package net.a11v1r15.alivent.messenger.mixin;
+package net.a11v1r15.aliventmessenger.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import net.a11v1r15.alivent.messenger.AliventMessenger;
+import net.a11v1r15.aliventmessenger.AliventMessenger;
 import net.minecraft.client.render.entity.feature.SkinOverlayOwner;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.CreeperEntity;

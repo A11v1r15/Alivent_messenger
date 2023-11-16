@@ -1,4 +1,4 @@
-package net.a11v1r15.alivent.messenger.mixin;
+package net.a11v1r15.aliventmessenger.mixin;
 
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Mixin;
@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import com.llamalad7.mixinextras.injector.WrapWithCondition;
 
-import net.a11v1r15.alivent.messenger.AliventMessenger;
+import net.a11v1r15.aliventmessenger.AliventMessenger;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.VillagerEntity;

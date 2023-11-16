@@ -1,4 +1,4 @@
-package net.a11v1r15.alivent.messenger.mixin;
+package net.a11v1r15.aliventmessenger.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

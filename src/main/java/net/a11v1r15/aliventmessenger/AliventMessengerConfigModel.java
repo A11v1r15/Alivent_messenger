@@ -1,4 +1,4 @@
-package net.a11v1r15.alivent.messenger;
+package net.a11v1r15.aliventmessenger;
 
 import blue.endless.jankson.Comment;
 import io.wispforest.owo.config.Option;
