@@ -1,6 +1,6 @@
 package net.a11v1r15.aliventmessenger;
 
-import nnet.a11v1r15.aliventmessenger.config.TinyConfig;
+import net.a11v1r15.aliventmessenger.config.TinyConfig;
 
 public class AliventMessengerConfig extends TinyConfig {
     @Entry //Gives aliven't messages for all mobs, instead of just ones with custom names
