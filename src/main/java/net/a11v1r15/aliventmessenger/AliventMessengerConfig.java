@@ -1,12 +1,6 @@
 package net.a11v1r15.aliventmessenger;
 
-import net.fabricmc.example.config.TinyConfig;
-import net.fabricmc.example.config.TinyConfig.Entry;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Text;
-
-import java.util.Collections;
-import java.util.List;
+import nnet.a11v1r15.aliventmessenger.config.TinyConfig;
 
 public class AliventMessengerConfig extends TinyConfig {
     @Entry //Gives aliven't messages for all mobs, instead of just ones with custom names
