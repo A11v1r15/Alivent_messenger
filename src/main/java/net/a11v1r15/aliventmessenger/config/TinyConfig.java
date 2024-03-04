@@ -1,16 +1,17 @@
-package net.fabricmc.example.config;
+package net.a11v1r15.aliventmessenger.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import net.a11v1r15.aliventmessenger.config.TinyConfig.EntryInfo;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 
 import java.io.IOException;
 import java.lang.annotation.*;
@@ -73,7 +74,7 @@ public class TinyConfig {
             else if (type == double.class) textField(info, Double::parseDouble, DECIMAL_ONLY, e.min(), e.max(),false);
             else if (type == String.class) textField(info, String::length, null, Math.min(e.min(),0), Math.max(e.max(),1),true);
             else if (type == boolean.class) {
-                Function<Object,Text> func = value -> new LiteralText((Boolean) value ? "True" : "False");
+                Function<Object,Text> func = value -> Text.literal((Boolean) value ? "True" : "False");
                 info.widget = new AbstractMap.SimpleEntry<ButtonWidget.PressAction, Function<Object, Text>>(button -> {
                     info.value = !(Boolean) info.value;
                     button.setMessage(func.apply(info.value));
@@ -81,7 +82,7 @@ public class TinyConfig {
             }
             else if (type.isEnum()) {
                 List<?> values = Arrays.asList(field.getType().getEnumConstants());
-                Function<Object,Text> func = value -> new TranslatableText(translationPrefix + "enum." + type.getSimpleName() + "." + info.value.toString());
+                Function<Object,Text> func = value -> Text.translatable(translationPrefix + "enum." + type.getSimpleName() + "." + info.value.toString());
                 info.widget = new AbstractMap.SimpleEntry<ButtonWidget.PressAction, Function<Object,Text>>( button -> {
                     int index = values.indexOf(info.value) + 1;
                     info.value = values.get(index >= values.size()? 0 : index);
@@ -131,7 +132,7 @@ public class TinyConfig {
             if (!(isNumber && s.isEmpty()) && !s.equals("-") && !s.equals(".")) {
                 value = f.apply(s);
                 inLimits = value.doubleValue() >= min && value.doubleValue() <= max;
-                info.error = inLimits? null : new AbstractMap.SimpleEntry<>(t, new LiteralText(value.doubleValue() < min ?
+                info.error = inLimits? null : new AbstractMap.SimpleEntry<>(t, Text.literal(value.doubleValue() < min ?
                         "§cMinimum " + (isNumber? "value" : "length") + (cast? " is " + (int)min : " is " + min) :
                         "§cMaximum " + (isNumber? "value" : "length") + (cast? " is " + (int)max : " is " + max)));
             }
@@ -164,7 +165,7 @@ public class TinyConfig {
 
     private static class TinyConfigScreen extends Screen {
         protected TinyConfigScreen(Screen parent) {
-            super(new TranslatableText(TinyConfig.translationPrefix + "title"));
+            super(Text.translatable(TinyConfig.translationPrefix + "title"));
             this.parent = parent;
         }
         private final Screen parent;
@@ -173,23 +174,27 @@ public class TinyConfig {
         protected void init() {
             super.init();
 
-            ButtonWidget done = this.addButton(new ButtonWidget(this.width/2 - 100,this.height - 28,200,20,
-                    new TranslatableText("gui.done"), (button) -> {
-                for (EntryInfo info : entries)
-                    try { info.field.set(null, info.value); }
-                    catch (IllegalAccessException ignore) {}
-                write();
-                client.openScreen(parent);
-            }));
-
+            ButtonWidget done = ButtonWidget.builder(
+                    Text.translatable("gui.done"), (button) -> {
+                        for (EntryInfo info : entries)
+                            try { info.field.set(null, info.value); }
+                            catch (IllegalAccessException ignore) {}
+                        write();
+                        client.setScreen(parent);
+                    })
+                .dimensions(this.width/2 - 100,this.height - 28,200,20)
+                .build();
             int y = 45;
             for (EntryInfo info : entries) {
                 if (info.widget instanceof Map.Entry) {
                     Map.Entry<ButtonWidget.PressAction,Function<Object,Text>> widget = (Map.Entry<ButtonWidget.PressAction, Function<Object, Text>>) info.widget;
-                    addButton(new ButtonWidget(width-85,y,info.width,20, widget.getValue().apply(info.value), widget.getKey()));
-                }
+                    ButtonWidget.builder(widget.getValue().apply(info.value), widget.getKey())
+                    .dimensions(width-85,y,info.width,20)
+                    .tooltip(Tooltip.of(Text.translatable(translationPrefix + info.field.getName() + ".tooltip")))
+                    .build();
+                }/*
                 else {
-                    TextFieldWidget widget = addButton(new TextFieldWidget(textRenderer, width-85, y, info.width, 20, null));
+                    TextFieldWidget widget = ButtonWidget.builder(textRenderer, width-85, y, info.width, 20, null);
                     widget.setText(info.tempValue);
 
                     Predicate<String> processor = ((BiFunction<TextFieldWidget, ButtonWidget, Predicate<String>>) info.widget).apply(widget,done);
@@ -197,12 +202,12 @@ public class TinyConfig {
                     processor.test(info.tempValue);
 
                     children.add(widget);
-                }
+                }*/
                 y += 30;
             }
 
         }
-
+    /*
         @Override
         public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
             this.renderBackground(matrices);
@@ -217,7 +222,7 @@ public class TinyConfig {
 
             int y = 40;
             for (EntryInfo info : entries) {
-                drawTextWithShadow(matrices, textRenderer, new TranslatableText(translationPrefix + info.field.getName()), 12, y + 10, 0xFFFFFF);
+                drawTextWithShadow(matrices, textRenderer, Text.translatable(translationPrefix + info.field.getName()), 12, y + 10, 0xFFFFFF);
 
                 if (info.error != null && info.error.getKey().isMouseOver(mouseX,mouseY))
                     renderTooltip(matrices, info.error.getValue(), mouseX, mouseY);
@@ -233,13 +238,14 @@ public class TinyConfig {
                     if (I18n.hasTranslation(key)) {
                         List<Text> list = new ArrayList<>();
                         for (String str : I18n.translate(key).split("\n"))
-                            list.add(new LiteralText(str));
+                            list.add(Text.literal(str));
                         renderTooltip(matrices, list, mouseX, mouseY);
                     }
                 }
                 y += 30;
             }
         }
+    */
     }
 
     @Retention(RetentionPolicy.RUNTIME)
