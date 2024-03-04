@@ -22,14 +22,14 @@ So that's a mod that may interest you. As it shows when a named mob dies, you wi
 * Removes the default messages sent to the log about aliven't villagers and custom-named mobs.
  
 
-# Game rules:
+# Settings:
 
-* aliventAllMobs: Gives aliven't messages for all mobs, instead of just ones with custom names. Defaults false.
-* aliventVillagers: Gives aliven't messages for all Villagers and Zombie Villagers with trades. Defaults true.
-* aliventLoreDrops: Gives lore info for items dropped from named mobs. Defaults true.
-* aliventNameColour: The names of the mobs will appear with colour. Defaults false.
-* aliventSpeciesName: The aliven't message for named mobs will display their "species" between parenthesis. Defaults false.
-* aliventServerSpamRemover: Removes the near-retundant log message of aliven't villagers and custom-named mobs. Defaults true.
+* allMobMessages: Gives aliven't messages for all mobs, instead of just ones with custom names. Defaults false.
+* villagerMessages: Gives aliven't messages for all Villagers and Zombie Villagers with trades. Defaults true.
+* loreDrops: Gives lore info for items dropped from named mobs. Defaults true.
+* nameColour: The names of the mobs will appear with colour. Defaults false.
+* speciesName: The aliven't message for named mobs will display their "species" between parenthesis. Defaults false.
+* aliventMessageServerSpamRemover: Removes the near-retundant log message of aliven't villagers and custom-named mobs. Defaults true.
 
 
 # Considerations:
@@ -44,5 +44,5 @@ So that's a mod that may interest you. As it shows when a named mob dies, you wi
 
 # Legal:
 
-You're free to add this mod to your modpack and distribute it. Telling me or making me a donation it's not necessary but it'll be appreciated.
-I don't intend to port it to Forge, feel free to look my source code and do it yourself. In this case, I want to be notified.
+* You're free to add this mod to your modpack and distribute it. Telling me or making me a donation it's not necessary but it'll be appreciated.
+* I don't intend to port it to Forge, feel free to look my source code and do it yourself. In this case, I want to be notified.

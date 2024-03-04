@@ -34,7 +34,7 @@ CommandOutput {
         at = @At(value = "STORE"), ordinal = 0
         )
     private ItemEntity aliventMessenger$giveLoreNameToDroppings(ItemEntity x) {
-        if(this.hasCustomName() && AliventMessenger.CONFIG.loreDrops()){
+        if(this.hasCustomName() && AliventMessenger.CONFIG.loreDrops){
             NbtList lore = new NbtList();
             lore.add(0, NbtString.of("{\"text\":\"" + this.getCustomName().getString() + "\"}"));
             NbtCompound display = x.getStack().getOrCreateSubNbt(ItemStack.DISPLAY_KEY);
@@ -52,9 +52,9 @@ CommandOutput {
         )
     private Text aliventMessenger$giveColourToEntityName(Text name) {
         if(name != null) {
-            if(AliventMessenger.CONFIG.speciesName())
+            if(AliventMessenger.CONFIG.speciesName)
                 name = Text.translatable("commands.list.nameAndId", name, this.getDefaultName());
-            if(SpawnEggItem.forEntity(this.getType()) != null && AliventMessenger.CONFIG.nameColour())
+            if(SpawnEggItem.forEntity(this.getType()) != null && AliventMessenger.CONFIG.nameColour)
                 ((MutableText)name).styled(style -> style.withColor(SpawnEggItem.forEntity(this.getType()).getColor(0)));
         }
         return name;
@@ -65,7 +65,7 @@ CommandOutput {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;getDefaultName()Lnet/minecraft/text/Text;")
         )
     private Text aliventMessenger$giveColourToEntityDefaultName(Text name) {
-        if(SpawnEggItem.forEntity(this.getType()) != null && AliventMessenger.CONFIG.nameColour())
+        if(SpawnEggItem.forEntity(this.getType()) != null && AliventMessenger.CONFIG.nameColour)
             ((MutableText)name).setStyle(name.getStyle().withColor(SpawnEggItem.forEntity(this.getType()).getColor(0)));
         return name;
     }

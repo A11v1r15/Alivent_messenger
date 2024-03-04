@@ -1,0 +1,15 @@
+{
+  "example_modid.tinyconfig.title": "Aliven't Messenger Settings",
+  "example_modid.tinyconfig.allMobMessages": "All mobs aliven't messages",
+  "example_modid.tinyconfig.intallMobMessagesTest.tooltip": "Gives aliven't messages for all mobs, instead of just ones with custom names",
+  "example_modid.tinyconfig.villagerMessages": "Villagers aliven't messages",
+  "example_modid.tinyconfig.villagerMessages.tooltip": "Gives aliven't messages for all Villagers and Zombie Villagers with trades",
+  "example_modid.tinyconfig.loreDrops": "Lore drops",
+  "example_modid.tinyconfig.loreDrops.tooltip": "Gives lore info for items dropped from named mobs",
+  "example_modid.tinyconfig.nameColour": "Name color",
+  "example_modid.tinyconfig.nameColour.tooltip": "The names of the mobs will appear with color",
+  "example_modid.tinyconfig.speciesName": "Species name",
+  "example_modid.tinyconfig.speciesName.tooltip": "The aliven't message for named mobs will display their \"species\" between parenthesis",
+  "example_modid.tinyconfig.aliventMessageServerSpamRemover": "Alivent message server spam remover",
+  "example_modid.tinyconfig.aliventMessageServerSpamRemover.tooltip": "Removes the near-retundant log message of aliven't villagers and custom-named mobs"
+}

@@ -25,7 +25,7 @@ implements SkinOverlayOwner {
 	private void aliventMessenger$giveExplosionDamageToExplodingCreeper(CallbackInfo info) {
         if (!this.getWorld().isClient &&
 		     this.getWorld().getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES) &&
-		     (this.hasCustomName() || AliventMessenger.CONFIG.allMobMessages())) {
+		     (this.hasCustomName() || AliventMessenger.CONFIG.allMobMessages)) {
 				 this.damage(this.getDamageSources().explosion(this.getWorld().createExplosion(null, this.getX(), this.getY(), this.getZ(), 0, World.ExplosionSourceType.NONE)), Float.MAX_VALUE);
 		}
 	}

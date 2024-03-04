@@ -9,9 +9,6 @@
 	"entrypoints": {
 		"main": [
 			"net.a11v1r15.aliventmessenger.AliventMessenger"
-		],
-		"preLaunch": [
-			"net.a11v1r15.aliventmessenger.preLaunch"
 		]
 	},
 	"contact": {

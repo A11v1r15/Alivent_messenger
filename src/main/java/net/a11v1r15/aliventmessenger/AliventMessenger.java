@@ -11,7 +11,7 @@ public class AliventMessenger implements ModInitializer {
     // That way, it's clear which mod wrote info, warnings, and errors.
     public static final String MOD_ID = "alivent-messenger";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
-    public static final net.a11v1r15.aliventmessenger.AliventMessengerConfig CONFIG = net.a11v1r15.aliventmessenger.AliventMessengerConfig.createAndLoad();
+    public static final AliventMessengerConfig CONFIG = new AliventMessengerConfig();
 
     @Override
     public void onInitialize() {
