@@ -3,7 +3,11 @@ Aliven't Messager is a simple mod that sends a message in the chat every time a 
 Do you wonder why your villager-based farm it's not working anymore? Do you have any pet mob that's not a Parrot, Wolf or Cat that you care for?
 So that's a mod that may interest you. As it shows when a named mob dies, you will know when "Zombington III", the zombie that scares your Villagers in the farm dies and why it happened so you can replace it as soon as possible and make it so the next one don't suffer the same fate. It'll also inform when that friend kills "Bacon Jr." so you can plan your revenge or if "Mr. BamChoo" rolled out of its pen into the abyss so you know you had to make a better house for them and make a nice memorial with the items they dropped.
 
- 
+
+# Note:
+
+* Current version is compatible with 24w09a and up if you disable Lore Drops
+
 
 # Aliven't messages send to everyone in the server/world:
 
@@ -34,6 +38,7 @@ So that's a mod that may interest you. As it shows when a named mob dies, you wi
 
 # Considerations:
 
+* I recomend using ModMenu
 * This mod is Server-side only. It'll work in single player but you'll need to ask the server owner or administrators to install it in order to receive the messages.
 * This mod applies for every mob with a custom name, be it because a nametag was used or because some mod or datapack named them.
 * You'll need to have Death Message on.
