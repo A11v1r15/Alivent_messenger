@@ -1,6 +1,5 @@
 package net.a11v1r15.aliventmessenger;
 
-import com.google.common.collect.Lists;
 import eu.midnightdust.lib.config.MidnightConfig;
 
 public class AliventMessengerConfig extends MidnightConfig {
