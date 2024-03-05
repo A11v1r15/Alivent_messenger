@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.llamalad7.mixinextras.injector.WrapWithCondition;
 
-import net.a11v1r15.aliventmessenger.AliventMessenger;
+import net.a11v1r15.aliventmessenger.AliventMessengerConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -39,13 +39,13 @@ extends Entity {
     private void aliventMessenger$sendAliventMessageToChat(CallbackInfo info) {
         if (!this.getWorld().isClient &&
             this.getWorld().getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES)) {
-            if (this.hasCustomName() || AliventMessenger.CONFIG.allMobMessages()) {
+            if (this.hasCustomName() || AliventMessengerConfig.allMobMessages) {
                 final boolean test = ((Object)this instanceof TameableEntity && ((TameableEntity)(Object)this).getOwner() instanceof ServerPlayerEntity);
                 this.getWorld().getPlayers().forEach(player -> {if (!(test && ((TameableEntity)(Object)this).getOwnerUuid() == player.getUuid())) player.sendMessage(this.getDamageTracker().getDeathMessage(), false);});
             } else if (((Object)this instanceof AllayEntity) && ((AllayEntity)(Object)this).isHoldingItem()) {
                 Optional<UUID> likedPlayer = ((AllayEntity)(Object)this).getBrain().getOptionalMemory(MemoryModuleType.LIKED_PLAYER);
                 this.getWorld().getPlayers().forEach(player -> {if (player.getUuid().equals(likedPlayer.get())) player.sendMessage(this.getDamageTracker().getDeathMessage(), false);});
-            } else if(AliventMessenger.CONFIG.villagerMessages()){
+            } else if(AliventMessengerConfig.villagerMessages){
                 if ((Object)this instanceof VillagerEntity) {
                     this.getWorld().getPlayers().forEach(player -> player.sendMessage(this.getDamageTracker().getDeathMessage(), false));
                 } else if ((Object)this instanceof ZombieVillagerEntity && !(((ZombieVillagerEntity)(Object)this).canImmediatelyDespawn(Double.MAX_VALUE))) {
@@ -60,6 +60,6 @@ extends Entity {
 	    at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;info(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V")
     )
     private boolean aliventMessenger$conditionallyRemoveAliventMessageFromLog(Logger instance, String message, Object p0, Object p1) {
-        return !AliventMessenger.CONFIG.aliventMessageServerSpamRemover();
+        return !AliventMessengerConfig.aliventMessageServerSpamRemover;
     }
 }

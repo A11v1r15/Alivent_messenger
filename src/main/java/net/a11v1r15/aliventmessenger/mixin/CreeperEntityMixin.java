@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import net.a11v1r15.aliventmessenger.AliventMessenger;
+import net.a11v1r15.aliventmessenger.AliventMessengerConfig;
 import net.minecraft.client.render.entity.feature.SkinOverlayOwner;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.CreeperEntity;
@@ -25,7 +25,7 @@ implements SkinOverlayOwner {
 	private void aliventMessenger$giveExplosionDamageToExplodingCreeper(CallbackInfo info) {
         if (!this.getWorld().isClient &&
 		     this.getWorld().getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES) &&
-		     (this.hasCustomName() || AliventMessenger.CONFIG.allMobMessages)) {
+		     (this.hasCustomName() || AliventMessengerConfig.allMobMessages)) {
 				 this.damage(this.getDamageSources().explosion(this.getWorld().createExplosion(null, this.getX(), this.getY(), this.getZ(), 0, World.ExplosionSourceType.NONE)), Float.MAX_VALUE);
 		}
 	}
