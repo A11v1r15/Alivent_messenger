@@ -31,11 +31,6 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// MixinExtras
-	implementation "com.github.LlamaLad7:MixinExtras:0.1.1"
-	annotationProcessor "com.github.LlamaLad7:MixinExtras:0.1.1"
-	include "com.github.LlamaLad7:MixinExtras:0.1.1"
-
 	// MidnightLib
   	modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
 	annotationProcessor "maven.modrinth:midnightlib:${project.midnightlib_version}"
