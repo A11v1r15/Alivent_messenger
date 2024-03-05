@@ -3,7 +3,7 @@
 	"id": "alivent-messenger",
 	"name": "Aliven't Messenger",
 	"version": "${version}",
-	"environment": "server",
+	"environment": "*",
 	"license": "MIT",
 	"icon": "assets/alivent-messenger/icon.png",
 	"entrypoints": {
