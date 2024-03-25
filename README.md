@@ -6,7 +6,7 @@ So that's a mod that may interest you. As it shows when a named mob dies, you wi
 
 # Note:
 
-* Current version is compatible with 24w09a and up if you disable Lore Drops
+* Current version is compatible with 24w09a and up but Lore Drops will not work
 
 
 # Aliven't messages send to everyone in the server/world:

@@ -9,9 +9,6 @@
 	"entrypoints": {
 		"main": [
 			"net.a11v1r15.aliventmessenger.AliventMessenger"
-		],
-		"preLaunch": [
-			"net.a11v1r15.aliventmessenger.preLaunch"
 		]
 	},
 	"contact": {
@@ -20,7 +17,7 @@
 		"issues": "https://github.com/A11v1r15/Alivent_messenger/issues"
 	},
 	"depends": {
-		"fabricloader": ">=0.14.24",
+		"fabricloader": ">=0.15.0",
 		"minecraft": "~1.20",
 		"java": ">=17",
 		"fabric-api": "*"
