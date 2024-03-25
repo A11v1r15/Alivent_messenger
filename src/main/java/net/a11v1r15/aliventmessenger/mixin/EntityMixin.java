@@ -6,12 +6,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import java.util.List;
 
 import net.a11v1r15.aliventmessenger.AliventMessengerConfig;
 import net.minecraft.SharedConstants;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.LoreComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -45,10 +42,6 @@ CommandOutput {
                 lore.add(0, NbtString.of("{\"text\":\"" + this.getCustomName().getString() + "\"}"));
                 NbtCompound display = x.getStack().getOrCreateSubNbt(ItemStack.DISPLAY_KEY);
                 display.put(ItemStack.LORE_KEY, lore);
-            } else {
-                LoreComponent lore = LoreComponent.DEFAULT;
-                lore.with(Text.literal(this.getCustomName().getString()));
-                x.getStack().set(DataComponentTypes.LORE, lore);
             }
         }
         return x;
