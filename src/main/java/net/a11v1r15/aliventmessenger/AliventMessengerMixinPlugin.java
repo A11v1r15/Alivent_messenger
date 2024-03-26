@@ -15,7 +15,11 @@ public class AliventMessengerMixinPlugin implements IMixinConfigPlugin {
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if(SharedConstants.getProtocolVersion() >= 1073742002){ //Snapshot 24w09a, that introduced Item Components
             if      (mixinClassName.contains("OneTwentyFive")) return true;
-            else if (mixinClassName.contains("OneTwentyOne")) return false;
+            else if (mixinClassName.contains("OneTwentyZero")) return false;
+        }
+        else {
+            if      (mixinClassName.contains("OneTwentyFive")) return false;
+            else if (mixinClassName.contains("OneTwentyZero")) return true;
         }
         return true;
     }
