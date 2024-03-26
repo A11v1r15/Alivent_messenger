@@ -21,6 +21,7 @@ implements SkinOverlayOwner {
 		super(entityType, world);
 	}
 	
+    @SuppressWarnings("resource")
 	@Inject(at = @At(value = "HEAD"), method = "explode()V")
 	private void aliventMessenger$giveExplosionDamageToExplodingCreeper(CallbackInfo info) {
         if (!this.getWorld().isClient &&

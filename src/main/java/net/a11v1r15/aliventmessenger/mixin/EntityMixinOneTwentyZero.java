@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 import net.a11v1r15.aliventmessenger.AliventMessengerConfig;
-import net.minecraft.SharedConstants;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -25,24 +24,21 @@ import net.minecraft.world.World;
 import net.minecraft.world.entity.EntityLike;
 
 @Mixin(Entity.class)
-public abstract class EntityMixin
+public abstract class EntityMixinOneTwentyZero
 implements Nameable,
 EntityLike,
 CommandOutput {
     @Shadow public World world;
-    @SuppressWarnings("deprecation")
     @ModifyVariable(
         method = "dropStack(Lnet/minecraft/item/ItemStack;F)Lnet/minecraft/entity/ItemEntity;",
         at = @At(value = "STORE"), ordinal = 0
         )
     private ItemEntity aliventMessenger$giveLoreNameToDroppings(ItemEntity x) {
         if(AliventMessengerConfig.loreDrops && this.hasCustomName()){
-            if(SharedConstants.DATA_PACK_VERSION < 33){ //Before Snapshot 24w09a, that introduced Item Components
-                NbtList lore = new NbtList();
-                lore.add(0, NbtString.of("{\"text\":\"" + this.getCustomName().getString() + "\"}"));
-                NbtCompound display = x.getStack().getOrCreateSubNbt(ItemStack.DISPLAY_KEY);
-                display.put(ItemStack.LORE_KEY, lore);
-            }
+            NbtList lore = new NbtList();
+            lore.add(0, NbtString.of("{\"text\":\"" + this.getCustomName().getString() + "\"}"));
+            NbtCompound display = x.getStack().getOrCreateSubNbt(ItemStack.DISPLAY_KEY);
+            display.put(ItemStack.LORE_KEY, lore);
         }
         return x;
     }

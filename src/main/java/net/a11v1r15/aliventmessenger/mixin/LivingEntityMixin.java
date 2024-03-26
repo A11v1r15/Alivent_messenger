@@ -35,6 +35,7 @@ extends Entity {
 
     @Shadow abstract DamageTracker getDamageTracker();
     
+    @SuppressWarnings("resource")
     @Inject(at = @At(value = "HEAD"), method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V")
     private void aliventMessenger$sendAliventMessageToChat(CallbackInfo info) {
         if (!this.getWorld().isClient &&
