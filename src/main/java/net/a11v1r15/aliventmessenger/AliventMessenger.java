@@ -3,8 +3,8 @@ package net.a11v1r15.aliventmessenger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.fabricmc.api.ModInitializer;
 import eu.midnightdust.lib.config.MidnightConfig;
+import net.fabricmc.api.ModInitializer;
 
 public class AliventMessenger implements ModInitializer {
     // This logger is used to write text to the console and the log file.

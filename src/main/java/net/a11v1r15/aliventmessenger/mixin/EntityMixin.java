@@ -8,7 +8,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 import net.a11v1r15.aliventmessenger.AliventMessengerConfig;
-import net.minecraft.SharedConstants;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.LoreComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -19,8 +20,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Nameable;
 import net.minecraft.world.World;
 import net.minecraft.world.entity.EntityLike;
-import net.minecraft.component.type.LoreComponent;
-import net.minecraft.component.DataComponentTypes;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin
@@ -28,7 +27,6 @@ implements Nameable,
 EntityLike,
 CommandOutput {
     @Shadow public World world;
-    @SuppressWarnings("deprecation")
     @ModifyVariable(
         method = "dropStack(Lnet/minecraft/item/ItemStack;F)Lnet/minecraft/entity/ItemEntity;",
         at = @At(value = "STORE"), ordinal = 0
@@ -36,7 +34,7 @@ CommandOutput {
     private ItemEntity aliventMessenger$giveLoreNameToDroppings(ItemEntity x) {
         if(AliventMessengerConfig.loreDrops && this.hasCustomName()){
             LoreComponent lore = LoreComponent.DEFAULT;
-            lore.with(Text.literal(this.getCustomName().getString()));
+            lore.of(Text.literal(this.getCustomName().getString()));
             x.getStack().set(DataComponentTypes.LORE, lore);
         }
         return x;
