@@ -3,14 +3,12 @@
   "minVersion": "0.8",
   "package": "net.a11v1r15.aliventmessenger.mixin",
   "compatibilityLevel": "JAVA_17",
-  "plugin": "net.a11v1r15.aliventmessenger.AliventMessengerMixinPlugin",
   "mixins": [
     "LivingEntityMixin",
     "CreeperEntityMixin",
     "ZombieVillagerEntityMixin",
     "VillagerEntityMixin",
-    "EntityMixinOneTwentyZero",
-    "EntityMixinOneTwentyFive"
+    "EntityMixin"
   ],
   "server": [
   ],
