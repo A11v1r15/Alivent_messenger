@@ -90,5 +90,6 @@ public class AliventColorUtil {
 		VANILLA.put(EntityType.ARMADILLO, new int[]{11366765, 8538184});
 		VANILLA.put(EntityType.BOGGED, new int[]{9084018, 3231003});
 		VANILLA.put(EntityType.CREAKING, new int[]{6250335, 16545810});
+		VANILLA.put(EntityType.HAPPY_GHAST, new int[]{16382457, 15111047});
 	}
 }
