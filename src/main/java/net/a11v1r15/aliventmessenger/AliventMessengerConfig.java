@@ -21,6 +21,6 @@ public class AliventMessengerConfig extends MidnightConfig {
     @Entry(category = "text") //The aliven't message for named mobs will display their "species" between parenthesis
     public static boolean speciesName = false;
 
-    @Entry(category = "text") //Removes the near-retundant log message of aliven't villagers and custom-named mobs
+    @Entry(category = "text") //Removes the near-redundant log message of aliven't villagers and custom-named mobs
     public static boolean aliventMessageServerSpamRemover = true;
 }

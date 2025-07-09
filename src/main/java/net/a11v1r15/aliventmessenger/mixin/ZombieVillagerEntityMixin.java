@@ -21,8 +21,8 @@ extends ZombieEntity{
 	@Shadow abstract VillagerData getVillagerData();
 	@Override
     protected Text getDefaultName() {
-		if(!this.getVillagerData().getProfession().equals(VillagerProfession.NONE)){
-			Text profession = Text.translatable(this.getType().getTranslationKey().replace("zombie_", "") + "." + Registries.VILLAGER_PROFESSION.getId(this.getVillagerData().getProfession()).getPath());
+		if(!this.getVillagerData().profession().equals(VillagerProfession.NONE)){
+			Text profession = Text.translatable(this.getType().getTranslationKey().replace("zombie_", "") + "." + Registries.VILLAGER_PROFESSION.getId(this.getVillagerData().profession().value()).getPath());
 			Text specie = this.getType().getName();
 			return Text.translatable("commands.list.nameAndId", specie, profession);
 		}
