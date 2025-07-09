@@ -44,34 +44,45 @@ public abstract class LivingEntityMixin
 	@Shadow
 	LazyEntityReference<PlayerEntity> attackingPlayer;
 
-	@Inject(at = @At(value = "HEAD"), method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V")
+	@Inject(at = @At("HEAD"), method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V")
 	private void aliventMessenger$sendAliventMessageToChat(CallbackInfo info) {
+		if (!(this.getWorld() instanceof ServerWorld serverWorld)) return;
+		if (!serverWorld.getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES)) return;
+
 		Text aliventMessage = this.getDamageTracker().getDeathMessage();
-		if (this.getWorld() instanceof ServerWorld serverWorld &&
-				serverWorld.getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES)) {
-			List<ServerPlayerEntity> playerList = Objects.requireNonNull(this.getServer()).getPlayerManager().getPlayerList();
-			if (this.hasCustomName() || AliventMessengerConfig.allMobMessages) {
-				playerList.forEach(player -> player.sendMessage(aliventMessage, false));
-			} else if (((Object) this instanceof AllayEntity allayEntity) && allayEntity.isHoldingItem()) {
-				Optional<UUID> likedPlayer = allayEntity.getBrain().getOptionalMemory(MemoryModuleType.LIKED_PLAYER);
-				boolean playerKill = AliventMessengerConfig.playerKillMessages && this.attackingPlayer != null;
-				playerList.forEach(player -> {
-					if (player.getUuid().equals(likedPlayer.get()) || playerKill)
-						player.sendMessage(aliventMessage, false);
-				});
-			} else if (AliventMessengerConfig.villagerMessages &&
-					(((Object) this instanceof VillagerEntity) || ((Object) this instanceof ZombieVillagerEntity))) {
-				if ((Object) this instanceof VillagerEntity) {
-					playerList.forEach(player -> player.sendMessage(aliventMessage, false));
-				} else if ((Object) this instanceof ZombieVillagerEntity zombieVillagerEntity && !zombieVillagerEntity.canImmediatelyDespawn(Double.MAX_VALUE)) {
-					playerList.forEach(player -> player.sendMessage(aliventMessage, false));
+		List<ServerPlayerEntity> playerList = Objects.requireNonNull(this.getServer()).getPlayerManager().getPlayerList();
+
+		boolean sendMessage = false;
+
+		// Common: Mobs with Custom names, AllMobMessages enabled or Player kill when playerKillMessages is Enabled
+		if (this.hasCustomName() || AliventMessengerConfig.allMobMessages ||
+				(AliventMessengerConfig.playerKillMessages && this.attackingPlayer != null)) {
+			sendMessage = true;
+		}
+
+		// Allay: Private message for its "owner"
+		else if ((Object) this instanceof AllayEntity allayEntity && allayEntity.isHoldingItem()) {
+			Optional<UUID> likedPlayer = allayEntity.getBrain().getOptionalMemory(MemoryModuleType.LIKED_PLAYER);
+			likedPlayer.ifPresent(targetUUID -> playerList.forEach(player -> {
+				if (player.getUuid().equals(targetUUID)) {
+					player.sendMessage(aliventMessage, false);
 				}
-			} else if (AliventMessengerConfig.playerKillMessages &&
-					this.attackingPlayer != null) {
-				playerList.forEach(player -> player.sendMessage(aliventMessage, false));
-			}
+			}));
+		}
+
+		// Non-wild Zombie Villagers:
+		else if (AliventMessengerConfig.villagerMessages &&
+				(Object) this instanceof ZombieVillagerEntity zombieVillagerEntity &&
+				!zombieVillagerEntity.canImmediatelyDespawn(Double.MAX_VALUE)) {
+			sendMessage = true;
+		}
+
+		// Envio final, se necessário
+		if (sendMessage) {
+			playerList.forEach(player -> player.sendMessage(aliventMessage, false));
 		}
 	}
+
 
 	@WrapWithCondition(
 			method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V",
