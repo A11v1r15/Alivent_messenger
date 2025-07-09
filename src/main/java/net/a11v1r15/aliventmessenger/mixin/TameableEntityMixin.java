@@ -17,16 +17,16 @@ import net.minecraft.world.World;
 @Mixin(TameableEntity.class)
 public abstract class TameableEntityMixin extends AnimalEntity {
 
-    protected TameableEntityMixin(EntityType<? extends AnimalEntity> entityType, World world) {
-        super(entityType, world);
-    }
+	protected TameableEntityMixin(EntityType<? extends AnimalEntity> entityType, World world) {
+		super(entityType, world);
+	}
 
-    @WrapWithCondition(
-	    method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V", 
-	    at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerEntity;sendMessage(Lnet/minecraft/text/Text;)V")
-    )
-    private boolean aliventMessenger$conditionallyUnprivateTameableDeathMessage(ServerPlayerEntity instance, Text message) {
-        return !(this.hasCustomName() || AliventMessengerConfig.allMobMessages ||
-                (AliventMessengerConfig.playerKillMessages && this.getAttacker() instanceof ServerPlayerEntity));
-    }
+	@WrapWithCondition(
+			method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerEntity;sendMessage(Lnet/minecraft/text/Text;)V")
+	)
+	private boolean aliventMessenger$conditionallyUnprivateTameableDeathMessage(ServerPlayerEntity instance, Text message) {
+		return !(this.hasCustomName() || AliventMessengerConfig.allMobMessages ||
+				(AliventMessengerConfig.playerKillMessages && this.getAttacker() instanceof ServerPlayerEntity));
+	}
 }

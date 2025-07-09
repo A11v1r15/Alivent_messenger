@@ -5,7 +5,8 @@ import net.minecraft.entity.EntityType;
 import java.util.*;
 
 public class AliventColorUtil {
-    public static HashMap<EntityType, int[]> VANILLA = new HashMap<>();
+	public static HashMap<EntityType, int[]> VANILLA = new HashMap<>();
+
 	static {
 		VANILLA.put(EntityType.PIG, new int[]{15771042, 14377823});
 		VANILLA.put(EntityType.CREEPER, new int[]{894731, 0});

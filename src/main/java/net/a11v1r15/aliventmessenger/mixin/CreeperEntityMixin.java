@@ -16,24 +16,24 @@ import net.minecraft.world.World;
 
 @Mixin(CreeperEntity.class)
 public abstract class CreeperEntityMixin
-extends HostileEntity {
+		extends HostileEntity {
 	protected CreeperEntityMixin(EntityType<? extends HostileEntity> entityType, World world) {
 		super(entityType, world);
 	}
 
 	@Inject(at = @At(value = "HEAD"), method = "explode()V")
 	private void aliventMessenger$giveExplosionDamageToExplodingCreeper(CallbackInfo info) {
-        if (this.getWorld() instanceof ServerWorld serverWorld) {
-			this.damage(serverWorld, this.getDamageSources().explosion(null, null),Float.MAX_VALUE);
+		if (this.getWorld() instanceof ServerWorld serverWorld) {
+			this.damage(serverWorld, this.getDamageSources().explosion(null, null), Float.MAX_VALUE);
 		}
 	}
-	
-    @ModifyVariable(
-        method = "interactMob(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResult;",
-        at = @At(value = "STORE"), ordinal = 0
-        )
-    private SoundEvent aliventMessenger$creeperAttackedByIgniter(SoundEvent sound, PlayerEntity player) {
-        this.setAttacker(player);
-        return sound;
-    }
+
+	@ModifyVariable(
+			method = "interactMob(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResult;",
+			at = @At(value = "STORE"), ordinal = 0
+	)
+	private SoundEvent aliventMessenger$creeperAttackedByIgniter(SoundEvent sound, PlayerEntity player) {
+		this.setAttacker(player);
+		return sound;
+	}
 }

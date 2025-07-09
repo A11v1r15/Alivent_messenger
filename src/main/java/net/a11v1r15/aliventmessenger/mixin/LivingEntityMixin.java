@@ -33,45 +33,51 @@ import net.minecraft.world.World;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin
-extends Entity {
-    public LivingEntityMixin(EntityType<?> type, World world) {
-        super(type, world);
-    }
+		extends Entity {
+	public LivingEntityMixin(EntityType<?> type, World world) {
+		super(type, world);
+	}
 
-    @Shadow abstract DamageTracker getDamageTracker();
-    @Shadow LazyEntityReference<PlayerEntity> attackingPlayer;
-    
-    @Inject(at = @At(value = "HEAD"), method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V")
-    private void aliventMessenger$sendAliventMessageToChat(CallbackInfo info) {
-       Text aliventMessage = this.getDamageTracker().getDeathMessage();
-        if (this.getWorld() instanceof ServerWorld serverWorld &&
-                serverWorld.getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES)) {
-            List<ServerPlayerEntity> playerList = Objects.requireNonNull(this.getServer()).getPlayerManager().getPlayerList();
-            if (this.hasCustomName() || AliventMessengerConfig.allMobMessages) {
-                playerList.forEach(player -> player.sendMessage(aliventMessage, false));
-            } else if (((Object) this instanceof AllayEntity allayEntity) && allayEntity.isHoldingItem()) {
-                Optional<UUID> likedPlayer = allayEntity.getBrain().getOptionalMemory(MemoryModuleType.LIKED_PLAYER);
-                boolean playerKill = AliventMessengerConfig.playerKillMessages && this.attackingPlayer != null;
-                playerList.forEach(player -> {if (player.getUuid().equals(likedPlayer.get()) || playerKill) player.sendMessage(aliventMessage, false);});
-            } else if(AliventMessengerConfig.villagerMessages &&
-                    (((Object) this instanceof VillagerEntity) || ((Object) this instanceof ZombieVillagerEntity))){
-                if ((Object)this instanceof VillagerEntity) {
-                    playerList.forEach(player -> player.sendMessage(aliventMessage, false));
-                } else if ((Object)this instanceof ZombieVillagerEntity zombieVillagerEntity && !zombieVillagerEntity.canImmediatelyDespawn(Double.MAX_VALUE)) {
-                    playerList.forEach(player -> player.sendMessage(aliventMessage, false));
-                }
-            } else if (AliventMessengerConfig.playerKillMessages &&
-                    this.attackingPlayer != null) {
-                playerList.forEach(player -> player.sendMessage(aliventMessage, false));
-            }
-        }
-    }
+	@Shadow
+	abstract DamageTracker getDamageTracker();
 
-    @WrapWithCondition(
-	    method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V", 
-	    at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;info(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V")
-    )
-    private boolean aliventMessenger$conditionallyRemoveAliventMessageFromLog(Logger instance, String message, Object p0, Object p1) {
-        return !AliventMessengerConfig.aliventMessageServerSpamRemover;
-    }
+	@Shadow
+	LazyEntityReference<PlayerEntity> attackingPlayer;
+
+	@Inject(at = @At(value = "HEAD"), method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V")
+	private void aliventMessenger$sendAliventMessageToChat(CallbackInfo info) {
+		Text aliventMessage = this.getDamageTracker().getDeathMessage();
+		if (this.getWorld() instanceof ServerWorld serverWorld &&
+				serverWorld.getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES)) {
+			List<ServerPlayerEntity> playerList = Objects.requireNonNull(this.getServer()).getPlayerManager().getPlayerList();
+			if (this.hasCustomName() || AliventMessengerConfig.allMobMessages) {
+				playerList.forEach(player -> player.sendMessage(aliventMessage, false));
+			} else if (((Object) this instanceof AllayEntity allayEntity) && allayEntity.isHoldingItem()) {
+				Optional<UUID> likedPlayer = allayEntity.getBrain().getOptionalMemory(MemoryModuleType.LIKED_PLAYER);
+				boolean playerKill = AliventMessengerConfig.playerKillMessages && this.attackingPlayer != null;
+				playerList.forEach(player -> {
+					if (player.getUuid().equals(likedPlayer.get()) || playerKill)
+						player.sendMessage(aliventMessage, false);
+				});
+			} else if (AliventMessengerConfig.villagerMessages &&
+					(((Object) this instanceof VillagerEntity) || ((Object) this instanceof ZombieVillagerEntity))) {
+				if ((Object) this instanceof VillagerEntity) {
+					playerList.forEach(player -> player.sendMessage(aliventMessage, false));
+				} else if ((Object) this instanceof ZombieVillagerEntity zombieVillagerEntity && !zombieVillagerEntity.canImmediatelyDespawn(Double.MAX_VALUE)) {
+					playerList.forEach(player -> player.sendMessage(aliventMessage, false));
+				}
+			} else if (AliventMessengerConfig.playerKillMessages &&
+					this.attackingPlayer != null) {
+				playerList.forEach(player -> player.sendMessage(aliventMessage, false));
+			}
+		}
+	}
+
+	@WrapWithCondition(
+			method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V",
+			at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;info(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V")
+	)
+	private boolean aliventMessenger$conditionallyRemoveAliventMessageFromLog(Logger instance, String message, Object p0, Object p1) {
+		return !AliventMessengerConfig.aliventMessageServerSpamRemover;
+	}
 }
