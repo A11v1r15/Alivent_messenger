@@ -30,11 +30,11 @@ public abstract class VillagerEntityMixin
 
 	@Inject(method = "onDeath", at = @At("HEAD"))
 	private void aliventMessenger$onVillagerDeath(DamageSource damageSource, CallbackInfo ci) {
-		if (!(this.getWorld() instanceof ServerWorld serverWorld)) return;
+		if (!(this.getEntityWorld() instanceof ServerWorld serverWorld)) return;
 		if (!serverWorld.getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES)) return;
 		if (!AliventMessengerConfig.villagerMessages) return;
 
-		List<ServerPlayerEntity> players = Objects.requireNonNull(this.getServer()).getPlayerManager().getPlayerList();
+		List<ServerPlayerEntity> players = Objects.requireNonNull(serverWorld.getServer()).getPlayerManager().getPlayerList();
 		players.forEach(player -> player.sendMessage(this.getDamageTracker().getDeathMessage(), false));
 	}
 

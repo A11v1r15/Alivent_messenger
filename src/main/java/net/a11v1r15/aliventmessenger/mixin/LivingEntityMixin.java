@@ -46,11 +46,11 @@ public abstract class LivingEntityMixin
 
 	@Inject(at = @At("HEAD"), method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V")
 	private void aliventMessenger$sendAliventMessageToChat(CallbackInfo info) {
-		if (!(this.getWorld() instanceof ServerWorld serverWorld)) return;
+		if (!(this.getEntityWorld() instanceof ServerWorld serverWorld)) return;
 		if (!serverWorld.getGameRules().getBoolean(GameRules.SHOW_DEATH_MESSAGES)) return;
 
 		Text aliventMessage = this.getDamageTracker().getDeathMessage();
-		List<ServerPlayerEntity> playerList = Objects.requireNonNull(this.getServer()).getPlayerManager().getPlayerList();
+		List<ServerPlayerEntity> playerList = Objects.requireNonNull(serverWorld.getServer()).getPlayerManager().getPlayerList();
 
 		boolean sendMessage = false;
 

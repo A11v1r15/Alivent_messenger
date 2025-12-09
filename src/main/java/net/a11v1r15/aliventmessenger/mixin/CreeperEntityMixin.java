@@ -23,7 +23,7 @@ public abstract class CreeperEntityMixin
 
 	@Inject(at = @At(value = "HEAD"), method = "explode()V")
 	private void aliventMessenger$giveExplosionDamageToExplodingCreeper(CallbackInfo info) {
-		if (this.getWorld() instanceof ServerWorld serverWorld) {
+		if (this.getEntityWorld() instanceof ServerWorld serverWorld) {
 			this.damage(serverWorld, this.getDamageSources().explosion(null, null), Float.MAX_VALUE);
 		}
 	}

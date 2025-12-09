@@ -17,11 +17,11 @@
 		"issues": "https://github.com/A11v1r15/Alivent_messenger/issues"
 	},
 	"depends": {
-		"fabricloader": ">=0.15.11",
-		"minecraft": ">=1.21.6",
+		"fabricloader": ">=0.18.1",
+		"minecraft": ">=1.21.9",
 		"java": ">=21",
-		"fabric-api": "*",
-		"midnightlib": ">=1.7.4"
+		"midnightlib": ">=1.8.1",
+		"fabric-api": "*"
 	},
 	"authors": [
 		"A11v1r15"
