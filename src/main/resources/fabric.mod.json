@@ -1,33 +1,33 @@
 {
 	"schemaVersion": 1,
 	"id": "alivent-messenger",
-	"name": "Aliven't Messenger",
 	"version": "${version}",
-	"environment": "*",
-	"license": "MIT",
-	"icon": "assets/alivent-messenger/icon.png",
-	"entrypoints": {
-		"main": [
-			"net.a11v1r15.aliventmessenger.AliventMessenger"
-		]
-	},
+	"name": "Aliven't Messenger",
+	"description": "A simple server-side mod that tells when a named mob turns aliven't",
+	"authors": [
+		"A11v1r15"
+	],
 	"contact": {
 		"homepage": "https://modrinth.com/mod/alivent-messager",
 		"sources": "https://github.com/A11v1r15/Alivent_messenger",
 		"issues": "https://github.com/A11v1r15/Alivent_messenger/issues"
 	},
-	"depends": {
-		"fabricloader": ">=0.18.1",
-		"minecraft": ">=1.21.9 <1.21.11",
-		"java": ">=21",
-		"midnightlib": ">=1.8.1",
-		"fabric-api": "*"
+	"license": "MIT",
+	"icon": "assets/alivent-messenger/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.a11v1r15.aliventmessenger.AliventMessenger"
+		]
 	},
-	"authors": [
-		"A11v1r15"
-	],
-	"description": "A simple server-side mod that tells when a named mob turns aliven't",
 	"mixins": [
 		"alivent-messenger.mixins.json"
-	]
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": ">=1.21.11",
+		"java": ">=21",
+		"midnightlib": ">=1.9.2",
+		"fabric-api": "*"
+	}
 }

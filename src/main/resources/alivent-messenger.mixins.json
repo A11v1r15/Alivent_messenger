@@ -1,17 +1,19 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "net.a11v1r15.aliventmessenger.mixin",
-  "compatibilityLevel": "JAVA_17",
-  "mixins": [
-    "CreeperEntityMixin",
-    "EntityMixin",
-    "LivingEntityMixin",
-    "TameableEntityMixin",
-    "VillagerEntityMixin",
-    "ZombieVillagerEntityMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+	"required": true,
+	"package": "net.a11v1r15.aliventmessenger.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"CreeperEntityMixin",
+		"EntityMixin",
+		"LivingEntityMixin",
+		"TameableEntityMixin",
+		"VillagerEntityMixin",
+		"ZombieVillagerEntityMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
 }

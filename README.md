@@ -6,7 +6,7 @@ So that's a mod that may interest you. As it shows when a named mob dies, you wi
 
 # Note:
 
-* Current version is compatible with 24w09a and up but Lore Drops will not work
+* 1.20.X version is compatible with 24w09a (1.20.5) and up but Lore Drops will not work
 
 
 # Aliven't messages send to everyone in the server/world:
@@ -15,7 +15,8 @@ So that's a mod that may interest you. As it shows when a named mob dies, you wi
 * All Villagers.
 * Zombie Villagers in process of conversion.
 * Zombie Villagers that used to be Villagers with trades.
-* All mobs, if you set the Game rule to do so.
+* All mobs, if you choose it in the settings to do so.
+* Mobs killed by players, if you choose it in the settings to do so.
  
 
 # Miscellaneous changes:
@@ -24,6 +25,7 @@ So that's a mod that may interest you. As it shows when a named mob dies, you wi
 * Creepers will be "blown up by" a player when getting ignited with Flint and Steel, Fire Charges or watever other itens that can ignite a Creeper. This will award the player the Monster Hunter archievement and count towards the mob kill statistics.
 * Zombie Villagers default names are composed by their profession followed by "(Zombie Villager)".
 * Allays holding items will give aliven't message to who gave them the item, as if it is with a Parrot, Wolf or Cat
+* Items dropped by named mobs will have their name in the item lore, unless you turn off the setting to do so
  
 
 # Settings:
@@ -43,7 +45,7 @@ So that's a mod that may interest you. As it shows when a named mob dies, you wi
 * This mod is Server-side only. It'll work in single player but you'll need to ask the server owner or administrators to install it in order to receive the messages.
 * This mod applies for every mob with a custom name, be it because a nametag was used or because some mod or datapack named them.
 * You'll need to have Death Message on.
-* Pretty sure it is compatible with any mod and any language, but mobs with species names between parenthesis will be shown in the server's language.
+* Pretty sure it is compatible with any mod and any language, but mobs with species names between parenthesis will be shown in the server's language in earlier versions.
 * I intend to add more features, but I don't have any new ideas.
 * Suggestions I like and see fitting may be implemented as well.
 * Yes, fish "drown". This is the message Minecraft gives for when they're out of the water for too long.
