@@ -92,5 +92,6 @@ public class AliventColorUtil {
 		VANILLA.put(EntityType.BOGGED,             new int[]{0x8A9C72, 0x314D1B});
 		VANILLA.put(EntityType.CREAKING,           new int[]{0x5F5F5F, 0xFC7812});
 		VANILLA.put(EntityType.HAPPY_GHAST,        new int[]{0xF9F9F9, 0xE69387}); // Same primary as the Ghast plus the colour from the Ghastling inside flesh
+		VANILLA.put(EntityType.COPPER_GOLEM,       new int[]{0xE3826C, 0xFFA851}); // Copper "skin" and eyes
 	}
 }
